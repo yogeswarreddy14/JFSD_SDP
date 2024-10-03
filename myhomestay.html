@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Homestays</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .homestay-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .homestay {
+            width: 30%;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .homestay img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .homestay h3 {
+            color: #333;
+        }
+        .book-now {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .book-now:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Available Homestays</h1>
+    </header>
+
+    <div class="container">
+        <div class="homestay-list">
+            <!-- Homestay 1 -->
+            <div class="homestay">
+                <img src="homestay1.jpg" alt="Homestay 1">
+                <h3>Cozy Cottage</h3>
+                <p>Price: $40/night</p>
+                <a href="booking.jsp?id=1&name=Cozy%20Cottage" class="book-again">Book again</a>
+            </div>
+            
+            <!-- Homestay 2 -->
+            <div class="homestay">
+                <img src="homestay2.jpg" alt="Homestay 2">
+                <h3>Mountain Retreat</h3>
+                <p>Price: $50/night</p>
+                <a href="booking.jsp?id=2&name=Mountain%20Retreat" class="book-again">Book again</a>
+            </div>
+            
+            <!-- Homestay 3 -->
+            <div class="homestay">
+                <img src="homestay3.jpg" alt="Homestay 3">
+                <h3>Lakeview Bungalow</h3>
+                <p>Price: $60/night</p>
+                <a href="booking.jsp?id=3&name=Lakeview%20Bungalow" class="book-again">Book again</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

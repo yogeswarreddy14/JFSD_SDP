@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('new-background.jpg'); /* Replace with your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #333;
+        }
+        .signup-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            text-align: center;
+        }
+        h2 {
+            color: #1e90ff; /* Blue heading */
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            text-align: left;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #1e90ff; /* Blue button */
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #1c86ee;
+            transform: translateY(-3px);
+        }
+        .btn-back {
+            margin-top: 15px;
+            background-color: #555; /* Gray button for dashboard */
+        }
+        .btn-back:hover {
+            background-color: #444;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <div class="error" id="error"></div>
+        <form id="signupForm">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm your password">
+
+            <button type="button" onclick="signUp()">Sign Up</button>
+        </form>
+
+        <!-- Go Back to Dashboard Button -->
+        <button class="btn-back" onclick="goToDashboard()">Go Back to Dashboard</button>
+    </div>
+
+    <script>
+        function signUp() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+            const error = document.getElementById('error');
+
+            error.innerHTML = ''; // Clear previous error messages
+
+            // Basic form validation
+            if (!name || !email || !password || !confirmPassword) {
+                error.innerHTML = 'Please fill out all fields.';
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                error.innerHTML = 'Passwords do not match.';
+                return;
+            }
+
+            if (password.length < 6) {
+                error.innerHTML = 'Password must be at least 6 characters long.';
+                return;
+            }
+
+            // Simulating form submission
+            alert(`Welcome, ${name}! Your sign-up was successful.`);
+        }
+
+        // Redirect function for Go Back to Dashboard
+        function goToDashboard() {
+            window.location.href = "index.html"; // Redirect to index.html (dashboard)
+        }
+    </script>
+
+</body>
+</html>

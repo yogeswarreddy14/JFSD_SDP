@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 1000px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        td {
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Your Booking History</h1>
+    </header>
+
+    <div class="container">
+        <h2>Past Bookings</h2>
+        <table id="bookingHistoryTable">
+            <thead>
+                <tr>
+                    <th>Homestay Name</th>
+                    <th>Check-in Date</th>
+                    <th>Check-out Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Booking history rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Homestay Booking Platform</p>
+    </footer>
+
+    <script>
+        // Sample booking history data, you can fetch this from your backend or database
+        const bookingHistory = [
+            { name: 'Cozy Cottage', checkIn: '2024-09-10', checkOut: '2024-09-15', status: 'Completed' },
+            { name: 'Ooty Homestay 1', checkIn: '2024-07-05', checkOut: '2024-07-10', status: 'Completed' },
+            { name: 'Delhi Homestay 2', checkIn: '2024-06-01', checkOut: '2024-06-05', status: 'Completed' }
+        ];
+
+        function populateBookingHistory() {
+            const tableBody = document.querySelector('#bookingHistoryTable tbody');
+            tableBody.innerHTML = ''; // Clear previous rows
+
+            bookingHistory.forEach(booking => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${booking.name}</td>
+                    <td>${booking.checkIn}</td>
+                    <td>${booking.checkOut}</td>
+                    <td>${booking.status}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Populate the booking history table when the page loads
+        window.onload = populateBookingHistory;
+    </script>
+
+</body>
+</html>

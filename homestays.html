@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homestay Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        .homestay-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .homestay {
+            width: 30%;
+            margin: 1%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .homestay img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .book-now {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Available Homestays</h1>
+    </header>
+
+    <div class="container">
+        <!-- Section for Searching Homestays -->
+        <div class="section">
+            <h2>Search for Homestays</h2>
+            <input id="searchInput" type="text" placeholder="Enter a location..." style="width: 80%; padding: 10px;">
+            <button style="padding: 10px;" onclick="searchLocation()">Search</button>
+        </div>
+
+        <!-- Section for Homestay Listings -->
+        <div class="section" id="homestaySection">
+            <h2>Available Homestays</h2>
+            <div class="homestay-list" id="homestayList">
+                <!-- Homestays will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Homestay Platform</p>
+    </footer>
+
+    <script>
+const data = {
+    Delhi: {
+        homestays: [
+            { name: 'Delhi Homestay 1', price: '$30/night', img: 'homestay1.jpg' },
+            { name: 'Delhi Homestay 2', price: '$35/night', img: 'homestay2.jpg' },
+            { name: 'Delhi Homestay 3', price: '$40/night', img: 'homestay3.jpg' },
+            { name: 'Delhi Homestay 4', price: '$45/night', img: 'homestay4.jpg' },
+            { name: 'Delhi Homestay 5', price: '$50/night', img: 'homestay5.jpg' },
+            { name: 'Delhi Homestay 6', price: '$55/night', img: 'homestay6.jpg' },
+            { name: 'Delhi Homestay 7', price: '$60/night', img: 'homestay7.jpg' },
+            { name: 'Delhi Homestay 8', price: '$65/night', img: 'homestay8.jpg' }
+        ]
+    },
+    Goa: {
+        homestays: [
+            { name: 'Goa Homestay 1', price: '$40/night', img: 'homestay1.jpg' },
+            { name: 'Goa Homestay 2', price: '$45/night', img: 'homestay2.jpg' },
+            { name: 'Goa Homestay 3', price: '$50/night', img: 'homestay3.jpg' },
+            { name: 'Goa Homestay 4', price: '$55/night', img: 'homestay4.jpg' },
+            { name: 'Goa Homestay 5', price: '$60/night', img: 'homestay5.jpg' },
+            { name: 'Goa Homestay 6', price: '$65/night', img: 'homestay6.jpg' },
+            { name: 'Goa Homestay 7', price: '$70/night', img: 'homestay7.jpg' },
+            { name: 'Goa Homestay 8', price: '$75/night', img: 'homestay8.jpg' }
+        ]
+    },
+    Manali: {
+        homestays: [
+            { name: 'Manali Homestay 1', price: '$35/night', img: 'homestay1.jpg' },
+            { name: 'Manali Homestay 2', price: '$40/night', img: 'homestay2.jpg' },
+            { name: 'Manali Homestay 3', price: '$45/night', img: 'homestay3.jpg' },
+            { name: 'Manali Homestay 4', price: '$50/night', img: 'homestay4.jpg' },
+            { name: 'Manali Homestay 5', price: '$55/night', img: 'homestay5.jpg' },
+            { name: 'Manali Homestay 6', price: '$60/night', img: 'homestay6.jpg' },
+            { name: 'Manali Homestay 7', price: '$65/night', img: 'homestay7.jpg' },
+            { name: 'Manali Homestay 8', price: '$70/night', img: 'homestay8.jpg' }
+        ]
+    },
+    Ladakh: {
+        homestays: [
+            { name: 'Ladakh Homestay 1', price: '$50/night', img: 'homestay1.jpg' },
+            { name: 'Ladakh Homestay 2', price: '$55/night', img: 'homestay2.jpg' },
+            { name: 'Ladakh Homestay 3', price: '$60/night', img: 'homestay3.jpg' },
+            { name: 'Ladakh Homestay 4', price: '$65/night', img: 'homestay4.jpg' },
+            { name: 'Ladakh Homestay 5', price: '$70/night', img: 'homestay5.jpg' },
+            { name: 'Ladakh Homestay 6', price: '$75/night', img: 'homestay6.jpg' },
+            { name: 'Ladakh Homestay 7', price: '$80/night', img: 'homestay7.jpg' },
+            { name: 'Ladakh Homestay 8', price: '$85/night', img: 'homestay8.jpg' }
+        ]
+    },
+    Ooty: {
+        homestays: [
+            { name: 'Ooty Homestay 1', price: '$45/night', img: 'homestay1.jpg' },
+            { name: 'Ooty Homestay 2', price: '$50/night', img: 'homestay2.jpg' },
+            { name: 'Ooty Homestay 3', price: '$55/night', img: 'homestay3.jpg' },
+            { name: 'Ooty Homestay 4', price: '$60/night', img: 'homestay4.jpg' },
+            { name: 'Ooty Homestay 5', price: '$65/night', img: 'homestay5.jpg' },
+            { name: 'Ooty Homestay 6', price: '$70/night', img: 'homestay6.jpg' },
+            { name: 'Ooty Homestay 7', price: '$75/night', img: 'homestay7.jpg' },
+            { name: 'Ooty Homestay 8', price: '$80/night', img: 'homestay8.jpg' }
+        ]
+    },
+    Darjeeling: {
+        homestays: [
+            { name: 'Darjeeling Homestay 1', price: '$30/night', img: 'homestay1.jpg' },
+            { name: 'Darjeeling Homestay 2', price: '$35/night', img: 'homestay2.jpg' },
+            { name: 'Darjeeling Homestay 3', price: '$40/night', img: 'homestay3.jpg' },
+            { name: 'Darjeeling Homestay 4', price: '$45/night', img: 'homestay4.jpg' },
+            { name: 'Darjeeling Homestay 5', price: '$50/night', img: 'homestay5.jpg' },
+            { name: 'Darjeeling Homestay 6', price: '$55/night', img: 'homestay6.jpg' },
+            { name: 'Darjeeling Homestay 7', price: '$60/night', img: 'homestay7.jpg' },
+            { name: 'Darjeeling Homestay 8', price: '$65/night', img: 'homestay8.jpg' }
+        ]
+    },
+    Kanyakumari: {
+        homestays: [
+            { name: 'Kanyakumari Homestay 1', price: '$25/night', img: 'homestay1.jpg' },
+            { name: 'Kanyakumari Homestay 2', price: '$30/night', img: 'homestay2.jpg' },
+            { name: 'Kanyakumari Homestay 3', price: '$35/night', img: 'homestay3.jpg' },
+            { name: 'Kanyakumari Homestay 4', price: '$40/night', img: 'homestay4.jpg' },
+            { name: 'Kanyakumari Homestay 5', price: '$45/night', img: 'homestay5.jpg' },
+            { name: 'Kanyakumari Homestay 6', price: '$50/night', img: 'homestay6.jpg' },
+            { name: 'Kanyakumari Homestay 7', price: '$55/night', img: 'homestay7.jpg' },
+            { name: 'Kanyakumari Homestay 8', price: '$60/night', img: 'homestay8.jpg' }
+        ]
+    },
+    Jaipur: {
+        homestays: [
+            { name: 'Jaipur Homestay 1', price: '$40/night', img: 'homestay1.jpg' },
+            { name: 'Jaipur Homestay 2', price: '$45/night', img: 'homestay2.jpg' },
+            { name: 'Jaipur Homestay 3', price: '$50/night', img: 'homestay3.jpg' },
+            { name: 'Jaipur Homestay 4', price: '$55/night', img: 'homestay4.jpg' },
+            { name: 'Jaipur Homestay 5', price: '$60/night', img: 'homestay5.jpg' },
+            { name: 'Jaipur Homestay 6', price: '$65/night', img: 'homestay6.jpg' },
+            { name: 'Jaipur Homestay 7', price: '$70/night', img: 'homestay7.jpg' },
+            { name: 'Jaipur Homestay 8', price: '$75/night', img: 'homestay8.jpg' }
+        ]
+    },
+    Shimla: {
+        homestays: [
+            { name: 'Shimla Homestay 1', price: '$35/night', img: 'homestay1.jpg' },
+            { name: 'Shimla Homestay 2', price: '$40/night', img: 'homestay2.jpg' },
+            { name: 'Shimla Homestay 3', price: '$45/night', img: 'homestay3.jpg' },
+            { name: 'Shimla Homestay 4', price: '$50/night', img: 'homestay4.jpg' },
+            { name: 'Shimla Homestay 5', price: '$55/night', img: 'homestay5.jpg' },
+            { name: 'Shimla Homestay 6', price: '$60/night', img: 'homestay6.jpg' },
+            { name: 'Shimla Homestay 7', price: '$65/night', img: 'homestay7.jpg' },
+            { name: 'Shimla Homestay 8', price: '$70/night', img: 'homestay8.jpg' }
+        ]
+    },
+    Coorg: {
+        homestays: [
+            { name: 'Coorg Homestay 1', price: '$50/night', img: 'homestay1.jpg' },
+            { name: 'Coorg Homestay 2', price: '$55/night', img: 'homestay2.jpg' },
+            { name: 'Coorg Homestay 3', price: '$60/night', img: 'homestay3.jpg' },
+            { name: 'Coorg Homestay 4', price: '$65/night', img: 'homestay4.jpg' },
+            { name: 'Coorg Homestay 5', price: '$70/night', img: 'homestay5.jpg' },
+            { name: 'Coorg Homestay 6', price: '$75/night', img: 'homestay6.jpg' },
+            { name: 'Coorg Homestay 7', price: '$80/night', img: 'homestay7.jpg' },
+            { name: 'Coorg Homestay 8', price: '$85/night', img: 'homestay8.jpg' }
+        ]
+    }
+};
+
+
+
+        function searchLocation() {
+            const location = document.getElementById('searchInput').value.trim();
+            const homestaySection = document.getElementById('homestayList');
+
+            homestaySection.innerHTML = '';
+
+            if (data[location]) {
+                // Populate homestays
+                data[location].homestays.forEach(homestay => {
+                    homestaySection.innerHTML += `
+                        <div class="homestay">
+                            <img src="${homestay.img}" alt="${homestay.name}">
+                            <h3>${homestay.name}</h3>
+                            <p>Price: ${homestay.price}</p>
+                            <a href="booking.jsp?id=${homestay.id}&name=${encodeURIComponent(homestay.name)}" class="book-now">Book Now</a>
+                        </div>
+                    `;
+                });
+            } else {
+                homestaySection.innerHTML = '<p>No homestays found for this location.</p>';
+            }
+        }
+    </script>
+
+</body>
+</html>
